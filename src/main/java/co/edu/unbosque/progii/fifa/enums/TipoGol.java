@@ -1,5 +1,8 @@
 package co.edu.unbosque.progii.fifa.enums;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public enum TipoGol  {
 	
 	AUTOGOL(0, "Autogol"),
@@ -18,16 +21,23 @@ public enum TipoGol  {
 	public int getId() {
 		return id;
 	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public static TipoGol getById(final int id) {
+		
+		return getValues().filter(p -> p.id == id).findFirst().get();
+	}
+	
+	public static TipoGol getByNombre(final String nombre) {
+		
+		return getValues().filter(p -> p.nombre.equals(nombre)).findFirst().get();
+	}
+	
+	public static Stream<TipoGol> getValues() {
+		
+		return Arrays.stream(values());
 	}
 }

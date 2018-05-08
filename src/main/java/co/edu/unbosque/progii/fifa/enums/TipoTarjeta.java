@@ -1,10 +1,13 @@
 package co.edu.unbosque.progii.fifa.enums;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public enum TipoTarjeta  {
 	
 	ROJA(0, "Roja"),
 	AMARILLA(1, "Amarilla");
-	
+
 	private int id;
 	private String nombre;
 	
@@ -17,16 +20,23 @@ public enum TipoTarjeta  {
 	public int getId() {
 		return id;
 	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public static TipoTarjeta getById(final int id) {
+		
+		return getValues().filter(p -> p.id == id).findFirst().get();
+	}
+	
+	public static TipoTarjeta getByNombre(final String nombre) {
+		
+		return getValues().filter(p -> p.nombre.equals(nombre)).findFirst().get();
+	}
+	
+	public static Stream<TipoTarjeta> getValues() {
+		
+		return Arrays.stream(values());
 	}
 }
