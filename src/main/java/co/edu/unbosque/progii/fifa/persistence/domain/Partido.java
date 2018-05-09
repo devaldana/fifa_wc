@@ -21,6 +21,8 @@ public class Partido extends BaseEntity implements Serializable {
 	private boolean jugado;
 	private int tirosEsquinaEquipoLocal;
 	private int tirosEsquinaEquipoVisitante;
+	private int cantidadAsistentes;
+	
 
 	//uni-directional many-to-one association to Arbitro
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -202,4 +204,11 @@ public class Partido extends BaseEntity implements Serializable {
 		return tarjeta;
 	}
 
+	public int getCantidadAsistentes() {
+		return cantidadAsistentes;
+	}
+
+	public void setCantidadAsistentes(int cantidadAsistentes) {
+		this.cantidadAsistentes = cantidadAsistentes;
+	}
 }

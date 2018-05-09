@@ -13,7 +13,7 @@ public enum Posicion  {
 	private int id;
 	private String nombre;
 	
-	private Posicion(final int id, final String nombre) {
+	Posicion(final int id, final String nombre) {
 		
 		this.id = id;
 		this.nombre = nombre;

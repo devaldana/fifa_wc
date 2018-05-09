@@ -9,10 +9,10 @@ public enum TipoGol  {
 	PENALTI(0, "Penalti"),
 	OTRO(1, "Otro");
 	
-	private int id;
+	int id;
 	private String nombre;
 	
-	private TipoGol(final int id, final String nombre) {
+	TipoGol(final int id, final String nombre) {
 		
 		this.id = id;
 		this.nombre = nombre;

@@ -11,7 +11,7 @@ public enum TipoTarjeta  {
 	private int id;
 	private String nombre;
 	
-	private TipoTarjeta(final int id, final String nombre) {
+	TipoTarjeta(final int id, final String nombre) {
 		
 		this.id = id;
 		this.nombre = nombre;
