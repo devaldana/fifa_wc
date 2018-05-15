@@ -12,14 +12,9 @@ import co.edu.unbosque.progii.fifa.enums.TipoTarjeta;
  */
 @Entity
 @Table(name="partidos_tarjetas")
-@NamedQuery(name="Tarjeta.findAll", query="SELECT t FROM Tarjeta t")
-public class Tarjeta implements Serializable {
+public class Tarjeta extends BaseEntity implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(insertable=false, updatable=false)
-	private Long id;
 
 	//uni-directional many-to-one association to Jugador
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -34,14 +29,6 @@ public class Tarjeta implements Serializable {
 	private TipoTarjeta tipoTarjeta;
 
 	public Tarjeta() {
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Jugador getJugador() {
