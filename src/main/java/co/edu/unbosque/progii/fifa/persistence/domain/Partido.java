@@ -17,13 +17,12 @@ public class Partido extends BaseEntity implements Serializable {
 	private Date fecha;
 	private int fuerasLugarEquipoLocal;
 	private int fuerasLugarEquipoVisitante;
-	private int jornada;
+	private Integer jornada;
 	private boolean jugado;
 	private int tirosEsquinaEquipoLocal;
 	private int tirosEsquinaEquipoVisitante;
 	private int cantidadAsistentes;
 	
-
 	//uni-directional many-to-one association to Arbitro
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_arbitro")
@@ -57,9 +56,6 @@ public class Partido extends BaseEntity implements Serializable {
 	@OneToMany(mappedBy="partido")
 	private List<Tarjeta> tarjetas;
 
-	public Partido() {
-	}
-
 	public Date getFecha() {
 		return this.fecha;
 	}
@@ -84,15 +80,15 @@ public class Partido extends BaseEntity implements Serializable {
 		this.fuerasLugarEquipoVisitante = fuerasLugarEquipoVisitante;
 	}
 
-	public int getJornada() {
+	public Integer getJornada() {
 		return this.jornada;
 	}
 
-	public void setJornada(int jornada) {
+	public void setJornada(Integer jornada) {
 		this.jornada = jornada;
 	}
 
-	public boolean getJugado() {
+	public boolean isJugado() {
 		return this.jugado;
 	}
 

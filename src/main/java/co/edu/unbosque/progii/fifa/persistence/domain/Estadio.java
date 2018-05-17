@@ -17,13 +17,9 @@ public class Estadio extends BaseEntity implements Serializable {
 	private Date fechaInauguracion;
 	private String nombre;
 
-	//bi-directional many-to-one association to Sede
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_sede")
 	private Sede sede;
-
-	public Estadio() {
-	}
 
 	public int getCapacidad() {
 		return this.capacidad;

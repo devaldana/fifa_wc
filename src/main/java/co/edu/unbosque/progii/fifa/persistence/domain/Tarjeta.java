@@ -15,21 +15,15 @@ import co.edu.unbosque.progii.fifa.enums.TipoTarjeta;
 public class Tarjeta extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	private TipoTarjeta tipoTarjeta;
 
-	//uni-directional many-to-one association to Jugador
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_jugador")
 	private Jugador jugador;
 
-	//bi-directional many-to-one association to Partido
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_partido")
 	private Partido partido;
-	
-	private TipoTarjeta tipoTarjeta;
-
-	public Tarjeta() {
-	}
 
 	public Jugador getJugador() {
 		return this.jugador;

@@ -15,12 +15,8 @@ public class Fase extends BaseEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to Partido
 	@OneToMany(mappedBy="fase")
 	private List<Partido> partidos;
-
-	public Fase() {
-	}
 
 	public String getNombre() {
 		return this.nombre;

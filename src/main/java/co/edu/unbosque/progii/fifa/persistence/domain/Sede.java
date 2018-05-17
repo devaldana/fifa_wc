@@ -16,12 +16,8 @@ public class Sede extends BaseEntity implements Serializable {
 	private String region;
 	private double temperatura;
 
-	//bi-directional many-to-one association to Estadio
 	@OneToMany(mappedBy="sede")
 	private List<Estadio> estadios;
-
-	public Sede() {
-	}
 
 	public String getNombre() {
 		return this.nombre;

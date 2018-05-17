@@ -14,9 +14,6 @@ public class Grupo extends BaseEntity implements Serializable {
 
 	private String nombre;
 
-	public Grupo() {
-	}
-
 	public String getNombre() {
 		return this.nombre;
 	}

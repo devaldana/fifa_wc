@@ -17,15 +17,10 @@ public class Jugador extends Persona implements Serializable {
 	private Posicion posicion;
 	private String camisa;
 
-	//bi-directional many-to-one association to Equipo
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_equipo")
 	private Equipo equipo;
 
-	public Jugador() {
-		
-	}
-	
 	public String getCamisa() {
 		return this.camisa;
 	}

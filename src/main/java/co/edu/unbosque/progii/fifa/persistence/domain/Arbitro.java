@@ -15,9 +15,6 @@ public class Arbitro extends Persona implements Serializable {
 	private int tarjetasAmarillas;
 	private int tarjetasRojas;
 
-	public Arbitro() {
-	}
-
 	public int getPartidosArbitrados() {
 		return this.partidosArbitrados;
 	}

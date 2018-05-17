@@ -23,9 +23,6 @@ public class Equipo extends BaseEntity implements Serializable {
 	@OneToMany(mappedBy="equipo", fetch=FetchType.LAZY)
 	private List<Jugador> jugadores;
 
-	public Equipo() {
-	}
-
 	public String getCodigoPais() {
 		return this.codigoPais;
 	}
@@ -74,18 +71,20 @@ public class Equipo extends BaseEntity implements Serializable {
 		this.jugadores = jugadores;
 	}
 
-	public Jugador addJugadore(Jugador jugadore) {
-		getJugadores().add(jugadore);
-		jugadore.setEquipo(this);
+	public Jugador addJugador(Jugador jugador) {
+		
+		getJugadores().add(jugador);
+		jugador.setEquipo(this);
 
-		return jugadore;
+		return jugador;
 	}
 
-	public Jugador removeJugadore(Jugador jugadore) {
-		getJugadores().remove(jugadore);
-		jugadore.setEquipo(null);
+	public Jugador removeJugador(Jugador jugador) {
+		
+		getJugadores().remove(jugador);
+		jugador.setEquipo(null);
 
-		return jugadore;
+		return jugador;
 	}
 
 }
