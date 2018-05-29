@@ -42,5 +42,4 @@ public class FaseServiceImpl implements FaseService {
 		
 		return fases;
 	}
-
 }

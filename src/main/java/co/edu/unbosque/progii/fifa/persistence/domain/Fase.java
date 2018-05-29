@@ -17,6 +17,10 @@ public class Fase extends BaseEntity implements Serializable {
 
 	@OneToMany(mappedBy="fase")
 	private List<Partido> partidos;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_campeonato")
+	private Campeonato campeonato;
 
 	public String getNombre() {
 		return this.nombre;
@@ -29,9 +33,13 @@ public class Fase extends BaseEntity implements Serializable {
 	public List<Partido> getPartidos() {
 		return this.partidos;
 	}
+	
+	public Campeonato getCampeonato() {
+		return campeonato;
+	}
 
-	public void setPartidos(List<Partido> partidos) {
-		this.partidos = partidos;
+	public void setCampeonato(Campeonato campeonato) {
+		this.campeonato = campeonato;
 	}
 
 	public Partido addPartido(Partido partido) {

@@ -18,7 +18,11 @@ public class Sede extends BaseEntity implements Serializable {
 
 	@OneToMany(mappedBy="sede")
 	private List<Estadio> estadios;
-
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_campeonato")
+	private Campeonato campeonato;
+	
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -49,6 +53,14 @@ public class Sede extends BaseEntity implements Serializable {
 
 	public void setEstadios(List<Estadio> estadios) {
 		this.estadios = estadios;
+	}
+	
+	public Campeonato getCampeonato() {
+		return campeonato;
+	}
+
+	public void setCampeonato(Campeonato campeonato) {
+		this.campeonato = campeonato;
 	}
 
 	public Estadio addEstadio(Estadio estadio) {

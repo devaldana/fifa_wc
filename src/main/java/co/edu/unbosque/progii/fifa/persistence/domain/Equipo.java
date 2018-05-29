@@ -2,6 +2,7 @@ package co.edu.unbosque.progii.fifa.persistence.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class Equipo extends BaseEntity implements Serializable {
 	private Date fechaFundacion;
 	private String federacion;
 	private String nombre;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_grupo")
+	private Grupo grupo;
 
 	@OneToMany(mappedBy="equipo", fetch=FetchType.LAZY)
 	private List<Jugador> jugadores;
@@ -69,6 +74,14 @@ public class Equipo extends BaseEntity implements Serializable {
 
 	public void setJugadores(List<Jugador> jugadores) {
 		this.jugadores = jugadores;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 	public Jugador addJugador(Jugador jugador) {
