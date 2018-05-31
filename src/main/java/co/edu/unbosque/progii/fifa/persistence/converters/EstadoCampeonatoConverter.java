@@ -5,7 +5,7 @@ import javax.persistence.Converter;
 
 import co.edu.unbosque.progii.fifa.enums.EstadoCampeonato;
 
-@Converter(autoApply=true)
+@Converter
 public class EstadoCampeonatoConverter implements AttributeConverter<EstadoCampeonato, Integer> {
 
 	@Override

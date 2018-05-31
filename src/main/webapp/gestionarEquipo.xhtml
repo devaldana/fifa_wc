@@ -55,9 +55,9 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<p:panelGrid styleClass="md-inputfield">
-								<p:selectOneMenu id="selectNacionalidad" value="#"
+								<p:selectOneMenu id="selectNacionalidad" value="#{campeonatoController.estadosCampeonato}"
 									style="margin-bottom:10px;text-align:center;">
-									<f:selectItems value="#{arbitroMB.listaDeNacionalidades()}" />
+									<f:selectItems value="#{campeonatoController.estadosCampeonato}" />
 								</p:selectOneMenu>
 							</p:panelGrid>
 						</div>

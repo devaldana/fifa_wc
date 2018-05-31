@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import co.edu.unbosque.progii.fifa.enums.TipoTarjeta;
+import co.edu.unbosque.progii.fifa.persistence.converters.TipoTarjetaConverter;
 
 
 /**
@@ -15,13 +16,16 @@ import co.edu.unbosque.progii.fifa.enums.TipoTarjeta;
 public class Tarjeta extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Column(name="id_tipo_tarjeta")
+	@Convert(converter=TipoTarjetaConverter.class)
 	private TipoTarjeta tipoTarjeta;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_jugador")
 	private Jugador jugador;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_partido")
 	private Partido partido;
 

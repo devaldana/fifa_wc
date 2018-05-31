@@ -5,11 +5,8 @@
 	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
 
 	<ui:define name="content">
-
-
-
 		<div class="card card-w-title">
-			<h:form>
+			<h:form id="frmSede">
 				<div align="center">
 					<h1>FORMULARIO SEDE</h1>
 				</div>
@@ -19,12 +16,13 @@
 				<div class="ui-g ui-fluid form-group">
 					<div class="ui-g-12 ui-md-4"></div>
 					<div class="ui-g-12 ui-md-1">
-						<p:outputLabel value="NOMBRE :" style="font-weight:bold;"></p:outputLabel>
+						<p:outputLabel value="Nombre:" style="font-weight:bold;"></p:outputLabel>
 					</div>
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:inputText required="true" />
+								<p:inputText required="true"
+									value="#{sedeController.editarSede.nombre}" />
 								<label></label>
 							</h:panelGroup>
 						</div>
@@ -41,7 +39,8 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:inputText required="true" />
+								<p:inputText required="true"
+									value="#{sedeController.editarSede.region}" />
 								<label></label>
 							</h:panelGroup>
 						</div>
@@ -58,7 +57,8 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:inputText required="true" />
+								<p:inputText required="true"
+									value="#{sedeController.editarSede.temperatura}" />
 								<label></label>
 							</h:panelGroup>
 						</div>
@@ -72,8 +72,10 @@
 					<div class="ui-g-12 ui-md-4">
 						<div class="ui-inputgroup" style="margin-left: 44%;">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:commandButton value="Guardar" actionListener="#"
-									icon="ui-icon-check" iconPos="right" style="width:auto" />
+								<p:commandButton value="Guardar"
+									actionListener="#{sedeController.guardar()}"
+									icon="ui-icon-check" iconPos="right" style="width:auto"
+									update="frmSede tblSedes" />
 							</h:panelGroup>
 						</div>
 					</div>
@@ -82,40 +84,37 @@
 
 			</h:form>
 
-			<h:form>
-				<br></br>
-				<br></br>
-				<p:dataTable var="sede" value="#{sedeMB.listaDeSedes()}"
-					selectionMode="single" rowKey="#" reflow="true"
-					style="margin-bottom:20px;text-align:center;">
-					<f:facet name="header">LISTADO SEDES</f:facet>
+			<br></br> <br></br>
+			<p:dataTable var="sede" value="#{sedeController.sedes}"
+				selectionMode="single" rowKey="#" reflow="true"
+				style="margin-bottom:20px;text-align:center;" id="tblSedes">
+				<f:facet name="header">LISTADO SEDES</f:facet>
 
-					<p:column headerText="NOMBRE" sortBy="#{sede.nombre}">
-						<h:outputText value="#{sede.nombre}" />
-					</p:column>
+				<p:column headerText="NOMBRE" sortBy="#{sede.nombre}">
+					<h:outputText value="#{sede.nombre}" />
+				</p:column>
 
-					<p:column headerText="REGIÓN" sortBy="#{sede.region}">
-						<h:outputText value="#{sede.region}" />
-					</p:column>
+				<p:column headerText="REGIÓN" sortBy="#{sede.region}">
+					<h:outputText value="#{sede.region}" />
+				</p:column>
 
-					<p:column headerText="TEMPERATURA" sortBy="#{sede.temperatura}">
-						<h:outputText value="#{sede.temperatura}" />
-					</p:column>
+				<p:column headerText="TEMPERATURA" sortBy="#{sede.temperatura}">
+					<h:outputText value="#{sede.temperatura}" />
+				</p:column>
 
-					<p:column headerText="EDITAR">
-						<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
-							<f:setPropertyActionListener value="#{sede}" target="#" />
-						</p:commandButton>
-					</p:column>
+				<p:column headerText="EDITAR">
+					<p:commandButton value="EDITAR" styleClass="teal-btn"
+						actionListener="#{sedeController.actualizar(sede)}" 
+						update="frmSede"/>
+				</p:column>
 
-					<p:column headerText="ELIMINAR">
-						<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
-							<f:setPropertyActionListener value="#{sede}" target="#" />
-						</p:commandButton>
-					</p:column>
+				<p:column headerText="ELIMINAR">
+					<p:commandButton value="Eliminar" styleClass="red-btn"
+							actionListener="#{sedeController.eliminar(sede)}" 
+							update="tblSedes"/>
+				</p:column>
 
-				</p:dataTable>
-			</h:form>
+			</p:dataTable>
 		</div>
 		<!-- Aqui termina el ingreso de datos del formulario -->
 

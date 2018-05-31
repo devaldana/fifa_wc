@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import co.edu.unbosque.progii.fifa.enums.Posicion;
+import co.edu.unbosque.progii.fifa.persistence.converters.PosicionConverter;
 
 
 /**
@@ -14,10 +15,13 @@ public class Jugador extends Persona implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name="id_posicion")
+	@Convert(converter=PosicionConverter.class)
 	private Posicion posicion;
+	
 	private String camisa;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_equipo")
 	private Equipo equipo;
 

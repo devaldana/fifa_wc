@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import co.edu.unbosque.progii.fifa.enums.TipoGol;
+import co.edu.unbosque.progii.fifa.persistence.converters.TipoGolConverter;
 
 
 /**
@@ -15,13 +16,16 @@ public class Gol extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_jugador")
 	private Jugador jugador;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_partido")
 	private Partido partido;
+	
+	@Column(name="id_tipo_gol")
+	@Convert(converter=TipoGolConverter.class)
 	private TipoGol tipoGol;
 
 	public Jugador getJugador() {

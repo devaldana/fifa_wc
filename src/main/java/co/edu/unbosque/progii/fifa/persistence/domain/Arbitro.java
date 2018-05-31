@@ -11,8 +11,13 @@ public class Arbitro extends Persona implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="partidos_arbitrados")
 	private int partidosArbitrados;
+	
+	@Column(name="tarjetas_amarillas")
 	private int tarjetasAmarillas;
+	
+	@Column(name="tarjetas_rojas")
 	private int tarjetasRojas;
 
 	public int getPartidosArbitrados() {

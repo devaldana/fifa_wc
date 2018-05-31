@@ -13,7 +13,7 @@ public class Grupo extends BaseEntity implements Serializable {
 
 	private String nombre;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "id_campeonato")
 	private Campeonato campeonato;
 

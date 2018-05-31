@@ -7,7 +7,7 @@
 	<ui:define name="content">
 
 		<div class="card card-w-title">
-			<h:form>
+			<h:form id="frmCampeonato">
 				<div align="center">
 					<h1>FORMULARIO CAMPEONATO</h1>
 				</div>
@@ -20,9 +20,9 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:outputLabel for="german" />
-								<p:calendar id="german" value="" locale="de" navigator="true"
-									pattern="dd/MM/yyyy" />
+
+								<p:inputText
+									value="#{campeonatoController.editarCampeonato.anio}" />
 
 							</h:panelGroup>
 						</div>
@@ -38,7 +38,8 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:inputText required="true" />
+								<p:inputText required="true"
+									value="#{campeonatoController.editarCampeonato.nombre}" />
 								<label></label>
 							</h:panelGroup>
 						</div>
@@ -49,17 +50,16 @@
 				<br></br>
 				<div class="ui-g ui-fluid form-group">
 					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-3"></div>
+
 					<div class="ui-g-12 ui-md-1">
-						<p:outputLabel value="ESTADO :" style="font-weight:bold;"></p:outputLabel>
+						<p:selectOneMenu id="selectEstadoCampeonato"
+							value="#{campeonatoController.editarCampeonato.estado}"
+							style="margin-bottom:10px;text-align:center;">
+							<f:selectItems value="#{campeonatoController.estadosCampeonato}" />
+						</p:selectOneMenu>
 					</div>
-					<div class="ui-g-12 ui-md-3">
-						<div class="ui-inputgroup">
-							<h:panelGroup styleClass="md-inputfield">
-								<p:selectBooleanButton onLabel="Yes" offLabel="No"
-									style="width:100%" />
-							</h:panelGroup>
-						</div>
-					</div>
+
 					<div class="ui-g-12 ui-md-4"></div>
 				</div>
 
@@ -69,8 +69,10 @@
 					<div class="ui-g-12 ui-md-4">
 						<div class="ui-inputgroup" style="margin-left: 44%;">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:commandButton value="Guardar" actionListener="#"
-									icon="ui-icon-check" iconPos="right" style="width:auto" />
+								<p:commandButton value="Guardar"
+									actionListener="#{campeonatoController.guardar()}"
+									icon="ui-icon-check" iconPos="right" style="width:auto"
+									update="tblTodosLosCampeonatos frmCampeonato" />
 							</h:panelGroup>
 						</div>
 					</div>
@@ -83,7 +85,8 @@
 			<br></br> <br></br>
 			<p:dataTable var="camp" value="#{campeonatoController.campeonatos}"
 				selectionMode="single" rowKey="#" reflow="true"
-				style="margin-bottom:20px;text-align:center;">
+				style="margin-bottom:20px;text-align:center;"
+				id="tblTodosLosCampeonatos">
 				<f:facet name="header">Historia Campeonatos</f:facet>
 				<p:column headerText="Año" sortBy="#{camp.anio}">
 					<h:outputText value="#{camp.anio}" />
@@ -98,15 +101,15 @@
 				</p:column>
 
 				<p:column headerText="EDITAR">
-					<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
-						<f:setPropertyActionListener value="#{campeonatoController.editarCampeonato()}" target="#" />
-					</p:commandButton>
+					<p:commandButton value="Editar" styleClass="teal-btn"
+						actionListener="#{campeonatoController.actualizar(camp)}" 
+						update="frmCampeonato"/>
 				</p:column>
 
 				<p:column headerText="ELIMINAR">
-					<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
-						<f:setPropertyActionListener value="#{campeonatoController.eliminarCampeonato()}" target="#" />
-					</p:commandButton>
+					<p:commandButton value="Eliminar" styleClass="orange-btn"
+						actionListener="#{campeonatoController.eliminar(camp)}" 
+						update="tblTodosLosCampeonatos"/>
 				</p:column>
 
 			</p:dataTable>

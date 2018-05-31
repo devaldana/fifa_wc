@@ -15,10 +15,10 @@ public class Fase extends BaseEntity implements Serializable {
 
 	private String nombre;
 
-	@OneToMany(mappedBy="fase")
+	@OneToMany(mappedBy="fase", fetch=FetchType.LAZY)
 	private List<Partido> partidos;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_campeonato")
 	private Campeonato campeonato;
 

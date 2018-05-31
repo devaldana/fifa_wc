@@ -15,13 +15,19 @@ public class Equipo extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="codigo_pais")
 	private String codigoPais;
+	
+	@Column(name="director_tecnico")
 	private String directorTecnico;
+	
+	@Column(name="fecha_fundacion")
 	private Date fechaFundacion;
+	
 	private String federacion;
 	private String nombre;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_grupo")
 	private Grupo grupo;
 

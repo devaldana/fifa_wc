@@ -13,11 +13,13 @@ public class Estadio extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private int capacidad;
+	@Column(name="fecha_inauguracion")
 	private Date fechaInauguracion;
+	
 	private String nombre;
-
-	@ManyToOne(fetch=FetchType.LAZY)
+	private int capacidad;
+	
+	@ManyToOne
 	@JoinColumn(name="id_sede")
 	private Sede sede;
 

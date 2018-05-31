@@ -1,7 +1,5 @@
 package co.edu.unbosque.progii.fifa;
 
-import static co.edu.unbosque.progii.fifa.util.Global.*;
-
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -28,6 +26,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import static co.edu.unbosque.progii.fifa.util.Global.*;
 
 @EnableWebMvc
 @Configuration

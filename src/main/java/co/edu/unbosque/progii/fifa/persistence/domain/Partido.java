@@ -15,45 +15,56 @@ public class Partido extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Date fecha;
+	
+	@Column(name="fueras_lugar_equipo_local")
 	private int fuerasLugarEquipoLocal;
+	
+	@Column(name="fueras_lugar_equipo_visitante")
 	private int fuerasLugarEquipoVisitante;
-	private Integer jornada;
-	private boolean jugado;
-	private int tirosEsquinaEquipoLocal;
-	private int tirosEsquinaEquipoVisitante;
+	
+	@Column(name="cantidad_asistentes")
 	private int cantidadAsistentes;
 	
+	private Integer jornada;
+	private boolean jugado;
+	
+	@Column(name="tiros_esquina_equipo_local")
+	private int tirosEsquinaEquipoLocal;
+	
+	@Column(name="tiros_esquina_equipo_visitante")
+	private int tirosEsquinaEquipoVisitante;
+	
 	//uni-directional many-to-one association to Arbitro
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_arbitro")
 	private Arbitro arbitro;
 
 	//uni-directional many-to-one association to Equipo
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_equipo_local")
 	private Equipo equipoLocal;
 
 	//uni-directional many-to-one association to Equipo
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_equipo_visitante")
 	private Equipo equipoVisitante;
 
 	//uni-directional many-to-one association to Estadio
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_estadio")
 	private Estadio estadio;
 
 	//bi-directional many-to-one association to Fase
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_fase")
 	private Fase fase;
 
 	//bi-directional many-to-one association to Gol
-	@OneToMany(mappedBy="partido")
+	@OneToMany(mappedBy="partido", fetch=FetchType.LAZY)
 	private List<Gol> goles;
 
 	//bi-directional many-to-one association to Tarjeta
-	@OneToMany(mappedBy="partido")
+	@OneToMany(mappedBy="partido", fetch=FetchType.LAZY)
 	private List<Tarjeta> tarjetas;
 
 	public Date getFecha() {

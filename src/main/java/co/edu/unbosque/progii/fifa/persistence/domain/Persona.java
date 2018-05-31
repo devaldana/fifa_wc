@@ -1,13 +1,16 @@
 package co.edu.unbosque.progii.fifa.persistence.domain;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Persona extends BaseEntity {
 	
+	@Column(name="url_foto")
+	private String urlFoto;
+	
 	private int edad;
 	private double estatura;
-	private String urlFoto;
 	private String nacionalidad;
 	private String nombre;
 	

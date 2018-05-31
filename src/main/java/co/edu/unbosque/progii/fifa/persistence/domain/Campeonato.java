@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import co.edu.unbosque.progii.fifa.enums.EstadoCampeonato;
+import co.edu.unbosque.progii.fifa.persistence.converters.EstadoCampeonatoConverter;
 
 
 /**
@@ -16,6 +17,9 @@ public class Campeonato extends BaseEntity implements Serializable {
 
 	private int anio;
 	private String nombre;
+	
+	@Column(name="id_estado")
+	@Convert(converter=EstadoCampeonatoConverter.class)
 	private EstadoCampeonato estado;
 
 	public int getAnio() {
