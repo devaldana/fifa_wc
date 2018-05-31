@@ -1,0 +1,123 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<div class="card card-w-title">
+			<h:form>
+				<div align="center">
+					<h1>FORMULARIO USUARIO</h1>
+				</div>
+				<br></br>
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+					<p:outputLabel value="NOMBRE :"  style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="" required="true" />
+								<label>nombre</label>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+					<p:outputLabel value="EMAIL :"  style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="" required="true" />
+								<label>ejemplo@unbosque.edu.co</label>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+				<br></br>
+
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+					<p:outputLabel value="CONTRASEÑA:"  style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:password value="" required="true" />
+								<label>contraseña</label>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<br></br>
+
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-4">
+						<div class="ui-inputgroup" style="margin-left: 44%;">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="Guardar" actionListener="#"
+									icon="ui-icon-check" iconPos="right" style="width:auto" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+			</h:form>
+
+			<h:form>
+				<br></br>
+				<br></br>
+				<p:dataTable var="user" value="#{usuarioMB.listaUsuarios()}"
+					selectionMode="single" rowKey="#" reflow="true"
+					style="margin-bottom:20px;text-align:center;">
+					<f:facet name="header">LISTA USUARIOS</f:facet>
+
+					<p:column headerText="NOMBRE USUARIO" sortBy="#{user.nomUsuario}">
+						<h:outputText value="#{user.nomUsuario}" />
+					</p:column>
+
+					<p:column headerText="EMAIL" sortBy="#{user.email}">
+						<h:outputText value="#{user.email}" />
+					</p:column>
+
+
+					<p:column headerText="EDITAR">
+						<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
+							<f:setPropertyActionListener value="#{estadio}" target="#" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="ELIMINAR">
+						<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
+							<f:setPropertyActionListener value="#{estadio}" target="#" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+		</div>
+		<!-- Aqui termina el ingreso de datos del formulario -->
+
+		<br></br>
+		<br></br>
+
+
+	</ui:define>
+
+</ui:composition>

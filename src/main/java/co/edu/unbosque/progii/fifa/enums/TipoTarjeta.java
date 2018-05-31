@@ -5,8 +5,8 @@ import java.util.stream.Stream;
 
 public enum TipoTarjeta  {
 	
-	ROJA(0, "Roja"),
-	AMARILLA(1, "Amarilla");
+	ROJA(1, "Roja"),
+	AMARILLA(2, "Amarilla");
 
 	private int id;
 	private String nombre;

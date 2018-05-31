@@ -1,0 +1,122 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<div class="card card-w-title">
+			<h:form>
+				<div align="center">
+					<h1>FORMULARIO CAMPEONATO</h1>
+				</div>
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="AÑO :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:outputLabel for="german" />
+								<p:calendar id="german" value="" locale="de" navigator="true"
+									pattern="dd/MM/yyyy" />
+
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="NOMBRE :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText required="true" />
+								<label></label>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="ESTADO :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:selectBooleanButton onLabel="Yes" offLabel="No"
+									style="width:100%" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-4">
+						<div class="ui-inputgroup" style="margin-left: 44%;">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="Guardar" actionListener="#"
+									icon="ui-icon-check" iconPos="right" style="width:auto" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+			</h:form>
+			<!-- AQUI TERMINA EL FORMULARIO -->
+
+
+			<br></br> <br></br>
+			<p:dataTable var="camp" value="#{campeonatoController.campeonatos}"
+				selectionMode="single" rowKey="#" reflow="true"
+				style="margin-bottom:20px;text-align:center;">
+				<f:facet name="header">Historia Campeonatos</f:facet>
+				<p:column headerText="Año" sortBy="#{camp.anio}">
+					<h:outputText value="#{camp.anio}" />
+				</p:column>
+
+				<p:column headerText="Nombre" sortBy="#{camp.nombre}">
+					<h:outputText value="#{camp.nombre}" />
+				</p:column>
+
+				<p:column headerText="Estado" sortBy="#{camp.estado.nombre}">
+					<h:outputText value="#{camp.estado.nombre}" />
+				</p:column>
+
+				<p:column headerText="EDITAR">
+					<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
+						<f:setPropertyActionListener value="#{campeonatoController.editarCampeonato()}" target="#" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="ELIMINAR">
+					<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
+						<f:setPropertyActionListener value="#{campeonatoController.eliminarCampeonato()}" target="#" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+		</div>
+		<!-- Aqui termina el ingreso de datos del formulario -->
+
+		<br></br>
+		<br></br>
+
+	</ui:define>
+
+</ui:composition>

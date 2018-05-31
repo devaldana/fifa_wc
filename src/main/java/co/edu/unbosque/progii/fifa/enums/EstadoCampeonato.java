@@ -5,9 +5,9 @@ import java.util.stream.Stream;
 
 public enum EstadoCampeonato {
 
-	ACTIVO(0, "Activo"),
-	INACTIVO(1, "Inactivo"),
-	FINALIZADO(2, "Finalizado");
+	ACTIVO(1, "Activo"),
+	INACTIVO(2, "Inactivo"),
+	FINALIZADO(3, "Finalizado");
 	
 	private int id;
 	private String nombre;

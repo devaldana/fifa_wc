@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import co.edu.unbosque.progii.fifa.enums.EstadoCampeonato;
@@ -23,6 +24,7 @@ import co.edu.unbosque.progii.fifa.services.PartidoService;
 import co.edu.unbosque.progii.fifa.services.SedeService;
 
 @Controller
+@Scope("request")
 public class CampeonatoController {
 	
 	@Autowired
@@ -55,10 +57,12 @@ public class CampeonatoController {
 	private List<Arbitro> arbitros;
 	
 	private Campeonato campeonatoActual;
+	private Campeonato editarCampeonato;
 	
 	public CampeonatoController() {
 		
-		cargarInfoCampeonatoActivo();
+		editarCampeonato = new Campeonato();
+		//cargarInfoCampeonatoActivo();
 	}
 	
 	private void cargarInfoCampeonatoActivo() {
@@ -93,5 +97,138 @@ public class CampeonatoController {
 		this.arbitros = this.partidos.stream()
 									 .map( partido -> partido.getArbitro())
 									 .collect(Collectors.toList());
+	}
+
+	public CampeonatoService getCampeonatoService() {
+		return campeonatoService;
+	}
+
+	public void setCampeonatoService(CampeonatoService campeonatoService) {
+		this.campeonatoService = campeonatoService;
+	}
+
+	public FaseService getFaseService() {
+		return faseService;
+	}
+
+	public void setFaseService(FaseService faseService) {
+		this.faseService = faseService;
+	}
+
+	public PartidoService getPartidoService() {
+		return partidoService;
+	}
+
+	public void setPartidoService(PartidoService partidoService) {
+		this.partidoService = partidoService;
+	}
+
+	public SedeService getSedeService() {
+		return sedeService;
+	}
+
+	public void setSedeService(SedeService sedeService) {
+		this.sedeService = sedeService;
+	}
+
+	public EquipoService getEquipoService() {
+		return equipoService;
+	}
+
+	public void setEquipoService(EquipoService equipoService) {
+		this.equipoService = equipoService;
+	}
+
+	public GrupoService getGrupoService() {
+		return grupoService;
+	}
+
+	public void setGrupoService(GrupoService grupoService) {
+		this.grupoService = grupoService;
+	}
+
+	public ArbitroService getArbitroService() {
+		return arbitroService;
+	}
+
+	public void setArbitroService(ArbitroService arbitroService) {
+		this.arbitroService = arbitroService;
+	}
+
+	public List<Campeonato> getCampeonatos() {
+		return campeonatos;
+	}
+
+	public void setCampeonatos(List<Campeonato> campeonatos) {
+		this.campeonatos = campeonatos;
+	}
+
+	public List<Fase> getFases() {
+		return fases;
+	}
+
+	public void setFases(List<Fase> fases) {
+		this.fases = fases;
+	}
+
+	public List<Partido> getPartidos() {
+		return partidos;
+	}
+
+	public void setPartidos(List<Partido> partidos) {
+		this.partidos = partidos;
+	}
+
+	public List<Sede> getSedes() {
+		return sedes;
+	}
+
+	public void setSedes(List<Sede> sedes) {
+		this.sedes = sedes;
+	}
+
+	public List<Equipo> getEquipos() {
+		return equipos;
+	}
+
+	public void setEquipos(List<Equipo> equipos) {
+		this.equipos = equipos;
+	}
+
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+
+	public List<Arbitro> getArbitros() {
+		return arbitros;
+	}
+
+	public void setArbitros(List<Arbitro> arbitros) {
+		this.arbitros = arbitros;
+	}
+
+	public Campeonato getCampeonatoActual() {
+		return campeonatoActual;
+	}
+
+	public void setCampeonatoActual(Campeonato campeonatoActual) {
+		this.campeonatoActual = campeonatoActual;
+	}
+	
+	public void agregarCampeonato() {
+		
+		this.campeonatoService.guardar(editarCampeonato);
+		this.campeonatos = campeonatoService.listarTodo();
+		
+		editarCampeonato = new Campeonato();
+	}
+	
+	public void eliminarCampeonato() {
+		
+		
 	}
 }

@@ -1,0 +1,335 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<div class="card card-w-title">
+			<h:form id="frmEquipo" prependId="false">
+				<div align="center">
+					<h1>FORMULARIO EQUIPO</h1>
+				</div>
+				
+				<br></br>
+				
+				<h:outputLabel id="lblNombreJugador" value="#{equipoMB.jugador}" />
+				<br></br>
+				<br></br>
+				<div class="ui-g ui-fluid form-group" style="">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="NOMBRE :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText required="true" />
+								<label></label>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="D.TÉCNICO :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText required="true" />
+								<label>director tecnico</label>
+							</h:panelGroup>
+						</div>
+					</div>
+
+					<div class="ui-g-12 ui-md-2"></div>
+				</div>
+
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="NACIONALIDAD:" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<p:panelGrid styleClass="md-inputfield">
+								<p:selectOneMenu id="selectNacionalidad" value="#"
+									style="margin-bottom:10px;text-align:center;">
+									<f:selectItems value="#{arbitroMB.listaDeNacionalidades()}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="F. FUNDACIÓN:" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:outputLabel for="german" />
+								<p:calendar id="german" value="" locale="de" navigator="true"
+									pattern="dd/MM/yyyy" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2"></div>
+				</div>
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="FOTO :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:fileUpload value="#" mode="simple" label="SELECCIONAR FOTO"
+									skinSimple="true" update="messages"
+									allowTypes="/(\.|\/)(gif|jpe?g|png)$/" rendered="true" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-6"></div>
+				</div>
+
+				<div class="ui-g ui-fluid form-group" style="margin-top: 50px;">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-2">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="Guardar" actionListener="#"
+									icon="ui-icon-check" iconPos="right" style="width:auto" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2">
+						<!-- Aqui Comienza el panel del formulario jugador -->
+						<div class="ui-inputgroup" style="margin-left: 44%;">
+							<h:panelGroup styleClass="md-inputfield">
+
+								<p:commandButton value="C.Jugador" actionListener="#"
+									iconPos="right" icon="ui-icon-check"
+									onclick="PF('dlg2').show();">
+								</p:commandButton>
+
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+			</h:form><!-- AQUI TERMINA EL FORMULARIO CREAR EQUIPO -->
+
+			<!-- Aqui comienza el panel emergente -->
+			<p:dialog widgetVar="dlg2" modal="true" height="920"
+				position="center" width="75%">
+				<div class="card card-w-title">
+					<h:form>
+						<div align="center">
+							<h1>FORMULARIO JUGADOR</h1>
+						</div>
+						<br></br>
+						<br></br>
+						<br></br>
+						<div class="ui-g ui-fluid form-group">
+							<div class="ui-g-12 ui-md-4"></div>
+							<div class="ui-g-12 ui-md-4">
+								<div class="ui-inputgroup">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText required="true" value="#{equipoMB.jugador}"></p:inputText>
+										<label>NOMBRE</label>
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="ui-g-12 ui-md-4"></div>
+						</div>
+
+						<div class="ui-g ui-fluid form-group">
+							<div class="ui-g-12 ui-md-4"></div>
+							<div class="ui-g-12 ui-md-4">
+								<div class="ui-inputgroup">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText required="true" value=""></p:inputText>
+										<label>EDAD</label>
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="ui-g-12 ui-md-4"></div>
+						</div>
+
+						<div class="ui-g ui-fluid form-group">
+							<div class="ui-g-12 ui-md-4"></div>
+							<div class="ui-g-12 ui-md-4">
+								<div class="ui-inputgroup">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText required="true" value=""></p:inputText>
+										<label>POSICIÓN</label>
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="ui-g-12 ui-md-4"></div>
+						</div>
+
+						<div class="ui-g ui-fluid form-group">
+							<div class="ui-g-12 ui-md-4"></div>
+							<div class="ui-g-12 ui-md-4">
+								<div class="ui-inputgroup">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText required="true" value=""></p:inputText>
+										<label>ESTATURA</label>
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="ui-g-12 ui-md-4"></div>
+						</div>
+
+						<div class="ui-g ui-fluid form-group">
+							<div class="ui-g-12 ui-md-4"></div>
+							<div class="ui-g-12 ui-md-4">
+								<div class="ui-inputgroup">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText required="true" value=""></p:inputText>
+										<label>N°.CAMISETA</label>
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="ui-g-12 ui-md-4"></div>
+						</div>
+
+						<div class="ui-g ui-fluid form-group">
+							<div class="ui-g-12 ui-md-4"></div>
+							<div class="ui-g-12 ui-md-4">
+								<div class="ui-inputgroup">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText required="true" value="" disabled="true"></p:inputText>
+										<label>EQUIPO</label>
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="ui-g-12 ui-md-4"></div>
+						</div>
+
+						<div class="ui-g ui-fluid form-group">
+							<div class="ui-g-12 ui-md-4"></div>
+							<div class="ui-g-12 ui-md-4"  style="margin-left:10%;">
+								<div class="ui-inputgroup">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:fileUpload value="#" mode="simple" label="SELECCIONAR FOTO"
+											skinSimple="true" update="messages"
+											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" rendered="true" />
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="ui-g-12 ui-md-4"></div>
+						</div>
+
+						<div class="ui-g ui-fluid form-group">
+							<div class="ui-g-12 ui-md-4"></div>
+							<div class="ui-g-12 ui-md-4">
+								<div class="ui-inputgroup" style="margin-left: 44%;">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:commandButton value="Guardar"
+											actionListener="#{equipoMB.agregarJugador()}"
+											oncomplete="PF('dlg2').hide();" icon="ui-icon-check"
+											iconPos="right" style="width:auto"
+											update="@([id$=lblNombreJugador])" />
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="ui-g-12 ui-md-4"></div>
+						</div>
+					</h:form>
+					<!-- Aqui termina el formulario de jugador -->
+
+
+					<!-- Aqui inicia la Lista de Jugadores -->
+					<br></br> <br></br>
+					<p:dataTable var="jugador" value="#{jugadorMB.listaDeJugadores()}"
+						selectionMode="single" rowKey="#" reflow="true"
+						style="margin-bottom:20px;text-align:center;">
+						<f:facet name="header">LISTA JUGADORES</f:facet>
+
+						<p:column headerText="NOMBRE" sortBy="#{jugador.nombre}">
+							<h:outputText value="#{jugador.nombre}" />
+						</p:column>
+
+						<p:column headerText="ESTATURA" sortBy="#{jugador.estatura}">
+							<h:outputText value="#{jugador.estatura}" />
+						</p:column>
+
+						<p:column headerText="EDAD" sortBy="#{jugador.edad}">
+							<h:outputText value="#{jugador.edad}" />
+						</p:column>
+
+						<p:column headerText="CAMISETA" sortBy="#{jugador.numCamiseta}">
+							<h:outputText value="#{jugador.numCamiseta}" />
+						</p:column>
+
+						<p:column headerText="FOTO" sortBy="#{jugador.foto}">
+							<h:outputText value="#{jugador.foto}" />
+						</p:column>
+
+						<p:column headerText="EQUIPO" sortBy="#{jugador.elEquipo}">
+							<h:outputText value="#{jugador.elEquipo.nombre}" />
+						</p:column>
+
+						<p:column headerText="EDITAR">
+							<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
+								<f:setPropertyActionListener value="#{jugador}" target="#" />
+							</p:commandButton>
+						</p:column>
+
+						<p:column headerText="ELIMINAR">
+							<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
+								<f:setPropertyActionListener value="#{jugador}" target="#" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+
+				</div>
+			</p:dialog>
+
+			<br></br> <br></br>
+			<p:dataTable var="equipo" value="#{equipoMB.listaDeEquipos()}"
+				selectionMode="single" rowKey="#" reflow="true"
+				style="margin-bottom:20px;text-align:center;">
+				<f:facet name="header">LISTA EQUIPOS</f:facet>
+
+				<p:column headerText="NOMBRE" sortBy="#{equipo.nombre}">
+					<h:outputText value="#{equipo.nombre}" />
+				</p:column>
+
+				<p:column headerText="D.TECNICO" sortBy="#{equipo.directorTecnico}">
+					<h:outputText value="#{equipo.directorTecnico}" />
+				</p:column>
+
+				<p:column headerText="FOTO" sortBy="#{equipo.fotoEscudo}">
+					<h:outputText value="#{equipo.fotoEscudo}" />
+				</p:column>
+
+				<p:column headerText="EDITAR">
+					<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
+						<f:setPropertyActionListener value="#{equipo}" target="#" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="ELIMINAR">
+					<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
+						<f:setPropertyActionListener value="#{equipo}" target="#" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</div>
+		<!-- Aqui termina el ingreso de datos del formulario -->
+
+		<br></br>
+		<br></br>
+
+
+	</ui:define>
+
+</ui:composition>

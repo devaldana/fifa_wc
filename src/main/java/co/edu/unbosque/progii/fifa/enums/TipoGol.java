@@ -5,9 +5,9 @@ import java.util.stream.Stream;
 
 public enum TipoGol  {
 	
-	AUTOGOL(0, "Autogol"),
-	PENALTI(0, "Penalti"),
-	OTRO(1, "Otro");
+	AUTOGOL(1, "Autogol"),
+	PENALTI(2, "Penalti"),
+	OTRO(3, "Otro");
 	
 	int id;
 	private String nombre;

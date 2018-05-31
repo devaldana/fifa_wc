@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Dashboard</ui:define>
+
+	<ui:define name="head">
+		<script type="text/javascript">
+            //<![CDATA[
+            function skinChart() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#FFC107', '#03A9F4'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#EEEEEE',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#212121'
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    shadow: false,
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
+                }
+            }
+            //]]>  
+        </script>
+		<style type="text/css">
+.main-content {
+	padding: 0;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="content">
+		<div class="ui-g dashboard" style="backgroung-image:url(/imagenes/fondoPanel.jpg);">
+
+			<div class="ui-g-1 ui-md-3"></div>
+			<div class="ui-g-10 ui-md-6" align="center">
+				<h1>BIENVENIDO AL PANEL OPERATIVO</h1>
+			</div>
+			<div class="ui-g-1 ui-md-3"></div>
+			
+			
+			<div class="ui-g-1 ui-md-1"></div>
+			<div class="ui-g-12 ui-md-5" style="margin-top: 60px;">
+				<p:graphicImage url="/imagenes/fondoPanel.jpg" width="100%" style="border-radius:30%;"></p:graphicImage>
+			</div>
+			<div class="ui-g-12 ui-md-5" align="center" style="margin-top: 60px;">
+				<p:panel header="Calendar" style="height:100%">
+					<p:schedule value="#{scheduleView.eventModel}" />
+				</p:panel>
+			</div>
+			<div class="ui-g-1 ui-md-1"></div>
+
+		</div>
+	</ui:define>
+
+</ui:composition>

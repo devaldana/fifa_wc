@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="card card-w-title">
+			<h:form>
+				<div align="center">
+					<h1>FORMULARIO FASES</h1>
+				</div>
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="NOMBRE :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText required="true" />
+								<label></label>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-4">
+						<div class="ui-inputgroup" style="margin-left: 44%;">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="Guardar" actionListener="#"
+									icon="ui-icon-check" iconPos="right" style="width:auto" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+			</h:form>
+
+			<br></br> <br></br>
+			<p:dataTable var="fase" value="#{faseMB.listaFases()}"
+				selectionMode="single" rowKey="#" reflow="true"
+				style="margin-bottom:20px;text-align:center;">
+				<f:facet name="header">LISTA FASES</f:facet>
+
+				<p:column headerText="Nombre" sortBy="#{fase.nombre}">
+					<h:outputText value="#{fase.nombre}" />
+				</p:column>
+
+				<p:column headerText="EDITAR">
+					<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
+						<f:setPropertyActionListener value="#{sede}" target="#" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="ELIMINAR">
+					<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
+						<f:setPropertyActionListener value="#{sede}" target="#" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</div>
+		<!-- Aqui termina el ingreso de datos del formulario -->
+
+		<br></br>
+		<br></br>
+
+
+	</ui:define>
+
+</ui:composition>

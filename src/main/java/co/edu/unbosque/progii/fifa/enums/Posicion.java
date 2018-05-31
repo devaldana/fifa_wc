@@ -5,10 +5,10 @@ import java.util.stream.Stream;
 
 public enum Posicion  {
 	
-	PORTERO(0, "Portero"),
-	DEFENSA(1, "Defensa"),
-	CENTROCAMPISTA(2, "Centrocampista"),
-	DELANTERO(3, "Delantero");
+	PORTERO(1, "Portero"),
+	DEFENSA(2, "Defensa"),
+	CENTROCAMPISTA(3, "Centrocampista"),
+	DELANTERO(4, "Delantero");
 	
 	private int id;
 	private String nombre;

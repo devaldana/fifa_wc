@@ -1,0 +1,211 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+
+
+		<div class="card card-w-title">
+			<h:form>
+				<div align="center">
+					<h1>FORMULARIO PARTIDO</h1>
+				</div>
+				<br></br>
+				<br></br>
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="FECHA :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:outputLabel for="german" />
+								<p:calendar id="german" value="" locale="de" navigator="true"
+									pattern="yyyy-MMM-dd" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="EQUIPO N°1 :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<p:panelGrid styleClass="md-inputfield">
+								<p:selectOneMenu id="selectEquipo1" value="#"
+									style="margin-bottom:10px;">
+									<f:selectItems value="#{partidoMB.listadoEquipos()}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2"></div>
+				</div>
+
+				<br></br>
+
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="ESTADIO :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<p:panelGrid styleClass="md-inputfield">
+								<p:selectOneMenu id="selectEstadio" value="#"
+									style="margin-bottom:10px;">
+									<f:selectItems value="#{partidoMB.listadoEstadios()}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="EQUIPO N°2 :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<p:panelGrid styleClass="md-inputfield">
+								<p:selectOneMenu id="selectEquipo2" value="#"
+									style="margin-bottom:10px;">
+									<f:selectItems value="#{partidoMB.listadoEquipos()}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2"></div>
+				</div>
+
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="ARBITRO :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<p:panelGrid styleClass="md-inputfield">
+								<p:selectOneMenu id="selectArbitro" value="#"
+									style="margin-bottom:10px;">
+									<f:selectItems value="#{partidoMB.listadoArbitros()}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="FASE :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<p:panelGrid styleClass="md-inputfield">
+								<p:selectOneMenu id="selectFase" value="#"
+									style="margin-bottom:10px">
+									<f:selectItems value="#{partidoMB.listadoFases()}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2"></div>
+				</div>
+
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="JORNADA :" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+							<p:panelGrid styleClass="md-inputfield">
+								<p:selectOneMenu id="selectFJornada" value="#"
+									style="margin-bottom:10px;">
+									<f:selectItems value="#{partidoMB.listadoJornada()}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-6"></div>
+				</div>
+
+
+				<br></br>
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-4">
+						<div class="ui-inputgroup" style="margin-left: 44%;">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="Guardar" actionListener="#"
+									icon="ui-icon-check" iconPos="right" style="width:auto" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+			</h:form>
+
+			<h:form>
+				<br></br>
+				<br></br>
+				<p:dataTable var="partido" value="#{partidoMB.listaDePartidos()}"
+					selectionMode="single" rowKey="#" reflow="true"
+					style="margin-bottom:20px;text-align:center;">
+					<f:facet name="header">LISTA PARTIDOS</f:facet>
+
+					<p:column headerText="FECHA" sortBy="#{partido.fecha}">
+						<h:outputText value="#{partido.fecha}" />
+					</p:column>
+
+					<p:column headerText="EQUIPO N°1" sortBy="#{partido.equipo1}">
+						<h:outputText value="#{partido.equipo1.nombre}" />
+					</p:column>
+
+					<p:column headerText="EQUIPO N°2" sortBy="#{partido.equipo2}">
+						<h:outputText value="#{partido.equipo2.nombre}" />
+					</p:column>
+
+					<p:column headerText="ARBITRO" sortBy="#{partido.arbitro}">
+						<h:outputText value="#{partido.arbitro.nombre}" />
+					</p:column>
+
+					<p:column headerText="ESTADIO" sortBy="#{partido.estadio}">
+						<h:outputText value="#{partido.estadio.nombre}" />
+					</p:column>
+
+					<p:column headerText="FASE" sortBy="#{partido.fase}">
+						<h:outputText value="#{partido.fase.nombre}" />
+					</p:column>
+
+					<p:column headerText="JORNADA" sortBy="#{partido.jornada}">
+						<h:outputText value="#{partido.jornada}" />
+					</p:column>
+
+					<p:column headerText="EDITAR">
+						<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
+							<f:setPropertyActionListener value="#{estadio}" target="#" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="ELIMINAR">
+						<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
+							<f:setPropertyActionListener value="#{estadio}" target="#" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+		</div>
+		<!-- Aqui termina el ingreso de datos del formulario -->
+
+		<br></br>
+		<br></br>
+
+
+	</ui:define>
+
+</ui:composition>

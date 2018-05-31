@@ -1,0 +1,741 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+
+		<div class="card card-w-title">
+			<h:form>
+				<div align="center">
+					<h1>FORMULARIO ESTADÍSTICAS PARTIDO</h1>
+				</div>
+				<!-- SELECCIONANDO EL PARTIDO -->
+				<div class="ui-g ui-fluid form-group" style="margin-top: 65px;">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-4" align="center">
+						<p:outputLabel value="PARTIDO" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-5"></div>
+					<div class="ui-g-12 ui-md-2" align="center">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:selectOneMenu id="selectPartido" value="#"
+									style="margin-bottom:10px;text-align:center;">
+									<f:selectItems value="#{operativoMB.mostrarPartidos()}" />
+								</p:selectOneMenu>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-5"></div>
+				</div>
+
+				<br></br>
+
+				<!-- GOLES MARCADOS -->
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup" style="margin-left:50%;">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="" onclick="PF('dlg1').show();"
+									style="border-radius:10%;"
+									styleClass="teal-btn ui-button-icon-left ui-icon ui-c ui-icon-add" />
+								<p:dialog widgetVar="dlg1" modal="true" height="400"
+									position="center" width="40%">
+									<div class="card card-w-title">
+										<h:form>
+											<div align="center">
+												<h1>DATOS#1 DEL GOL</h1>
+											</div>
+											<br></br>
+											<!-- INGRESAR JUGADOR -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<h3>Jugador * :</h3>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:selectOneMenu id="selectJugGol" value="#"
+																style="margin-bottom:10px;text-align:center;">
+																<f:selectItems
+																	value="#{jugadorMB.listadoDeLosJugadores()}" />
+															</p:selectOneMenu>
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+											<br></br>
+											<!-- INGRESAR TIPO GOL -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<h3>Tipo Gol * :</h3>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:selectOneMenu id="selectTipoGol" value="#"
+																style="margin-bottom:10px;text-align:center;">
+																<f:selectItems value="#{operativoMB.listaDeTipoGol()}" />
+															</p:selectOneMenu>
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+											<br></br>
+											<!-- BOTON GUARDAR -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup" style="margin-left: 50%;">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:commandButton value="Cancelar"
+																oncomplete="PF('dlg2').hide();" icon="ui-icon-check"
+																iconPos="right" style="width:auto"
+																update="@([id$=lblNombreJugador])" />
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup" style="margin-right: 50%;">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:commandButton value="Guardar"
+																actionListener="#{equipoMB.agregarJugador()}"
+																oncomplete="PF('dlg1').hide();" icon="ui-icon-check"
+																iconPos="right" style="width:auto"
+																update="@([id$=lblNombreJugador])" />
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+										</h:form>
+									</div>
+								</p:dialog>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1" align="center">
+						<p:commandButton value=""
+							styleClass="ui-button-icon-left ui-icon ui-c ui-icon-search"
+							style="border-radius:50%;" onclick="PF('dlgS1').show()">
+						</p:commandButton>
+						<p:dialog widgetVar="dlgS1" modal="true" draggable="false"
+							resizable="false" width="40%">
+							<h1>DATOS#1 GOLES</h1>
+							<p:dataTable var="jugador"
+								value="#{jugadorMB.listaDeJugadores()}" selectionMode="single"
+								rowKey="#" reflow="true"
+								style="margin-bottom:20px;text-align:center;">
+								<f:facet name="header">LISTA JUGADORES</f:facet>
+
+								<p:column headerText="NOMBRE" sortBy="#{jugador.nombre}">
+									<h:outputText value="#{jugador.nombre}" />
+								</p:column>
+
+								<p:column headerText="TIPO GOL" sortBy="">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="N° GOLES" sortBy="">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="EDITAR">
+									<p:commandButton action="#" value="EDITAR"
+										styleClass="teal-btn">
+										<f:setPropertyActionListener value="#{jugador}" target="#" />
+									</p:commandButton>
+								</p:column>
+
+								<p:column headerText="ELIMINAR">
+									<p:commandButton action="#" value="ELIMINAR"
+										styleClass="red-btn">
+										<f:setPropertyActionListener value="#{jugador}" target="#" />
+									</p:commandButton>
+								</p:column>
+
+							</p:dataTable>
+
+						</p:dialog>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"
+									disabled="true"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2" align="center">
+						<p:outputLabel value="GOLES" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"
+									disabled="true"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1" align="center">
+						<p:commandButton value=""
+							styleClass="ui-button-icon-left ui-icon ui-c ui-icon-search"
+							style="border-radius:50%;" onclick="PF('dlgS2').show()"></p:commandButton>
+						<p:dialog widgetVar="dlgS2" modal="true" draggable="false"
+							resizable="false" width="40%">
+							<h1>DATOS#2 GOLES</h1>
+							<p:dataTable var="jugador"
+								value="#{jugadorMB.listaDeJugadores()}" selectionMode="single"
+								rowKey="#" reflow="true"
+								style="margin-bottom:20px;text-align:center;">
+								<f:facet name="header">LISTADO JUGADOR CON GOLES</f:facet>
+
+								<p:column headerText="NOMBRE" sortBy="#{jugador.nombre}">
+									<h:outputText value="#{jugador.nombre}" />
+								</p:column>
+
+								<p:column headerText="TIPO GOL" sortBy="">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="N° GOLES" sortBy="">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="EDITAR">
+									<p:commandButton action="#" value="EDITAR"
+										styleClass="teal-btn">
+										<f:setPropertyActionListener value="#{jugador}" target="#" />
+									</p:commandButton>
+								</p:column>
+
+								<p:column headerText="ELIMINAR">
+									<p:commandButton action="#" value="ELIMINAR"
+										styleClass="red-btn">
+										<f:setPropertyActionListener value="#{jugador}" target="#" />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+						</p:dialog>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="" onclick="PF('dlg2').show();"
+									style="border-radius:10%;"
+									styleClass="teal-btn ui-button-icon-left ui-icon ui-c ui-icon-add" />
+								<p:dialog widgetVar="dlg2" modal="true" height="400"
+									position="center" width="40%">
+									<div class="card card-w-title">
+										<h:form>
+											<div align="center">
+												<h1>INGRESO#2 DEL GOL</h1>
+											</div>
+											<br></br>
+											<!-- INGRESAR JUGADOR -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<h3>Jugador * :</h3>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:selectOneMenu id="selectJugGol" value="#"
+																style="margin-bottom:10px;text-align:center;">
+																<f:selectItems
+																	value="#{jugadorMB.listadoDeLosJugadores()}" />
+															</p:selectOneMenu>
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+											<br></br>
+											<!-- INGRESAR TIPO GOL -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<h3>Tipo Gol * :</h3>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:selectOneMenu id="selectTipoGol" value="#"
+																style="margin-bottom:10px;text-align:center;">
+																<f:selectItems value="#{operativoMB.listaDeTipoGol()}" />
+															</p:selectOneMenu>
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+											<br></br>
+											<!-- BOTON GUARDAR -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup" style="margin-left: 50%;">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:commandButton value="Cancelar"
+																oncomplete="PF('dlg2').hide();" icon="ui-icon-check"
+																iconPos="right" style="width:auto"
+																update="@([id$=lblNombreJugador])" />
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup" style="margin-right: 50%;">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:commandButton value="Guardar"
+																actionListener="#{equipoMB.agregarJugador()}"
+																oncomplete="PF('dlg1').hide();" icon="ui-icon-check"
+																iconPos="right" style="width:auto"
+																update="@([id$=lblNombreJugador])" />
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+										</h:form>
+									</div>
+								</p:dialog>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2"></div>
+				</div>
+
+				<br></br>
+
+				<!-- TIROS AL ARCO -->
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2" align="center">
+						<p:outputLabel value="TIROS AL ARCO" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<br></br>
+				<!-- FALTAS COMETIDAS -->
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2" align="center">
+						<p:outputLabel value="FALTAS COMETIDAS" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<br></br>
+				<!-- CORNERS EJECUTADOS -->
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2" align="center">
+						<p:outputLabel value="CORNERS EJECUTADOS" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<br></br>
+				<!-- AMONESTADOS -->
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup" style="margin-left:50%;">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="" onclick="PF('dlg3').show();"
+									style="border-radius:10%;"
+									styleClass="teal-btn ui-button-icon-left ui-icon ui-c ui-icon-add" />
+								<p:dialog widgetVar="dlg3" modal="true" height="400"
+									position="center" width="40%">
+									<div class="card card-w-title">
+										<h:form>
+											<div align="center">
+												<h1>INGRESO#1 AMONESTADO</h1>
+											</div>
+											<br></br>
+											<!-- INGRESAR JUGADOR -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<h3>Jugador * :</h3>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:selectOneMenu id="selectJugGol" value="#"
+																style="margin-bottom:10px;text-align:center;">
+																<f:selectItems
+																	value="#{jugadorMB.listadoDeLosJugadores()}" />
+															</p:selectOneMenu>
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+											<br></br>
+											<!-- INGRESAR TIPO GOL -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<h3>Tipo Tarjeta * :</h3>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:selectOneMenu id="selectTipoGol" value="#"
+																style="margin-bottom:10px;text-align:center;">
+																<f:selectItems value="#{operativoMB.listaDeTipoGol()}" />
+															</p:selectOneMenu>
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+											<br></br>
+											<!-- BOTON GUARDAR -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup" style="margin-left: 50%;">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:commandButton value="Cancelar"
+																oncomplete="PF('dlg2').hide();" icon="ui-icon-check"
+																iconPos="right" style="width:auto"
+																update="@([id$=lblNombreJugador])" />
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup" style="margin-right: 50%;">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:commandButton value="Guardar"
+																actionListener="#{equipoMB.agregarJugador()}"
+																oncomplete="PF('dlg3').hide();" icon="ui-icon-check"
+																iconPos="right" style="width:auto"
+																update="@([id$=lblNombreJugador])" />
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+										</h:form>
+									</div>
+								</p:dialog>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1" align="center">
+						<p:commandButton value=""
+							styleClass="ui-button-icon-left ui-icon ui-c ui-icon-search"
+							style="border-radius:50%;" onclick="PF('dlgS3').show()"></p:commandButton>
+						<p:dialog widgetVar="dlgS3" modal="true" draggable="false"
+							resizable="false" width="40%">
+							<h1>DATOS#1 AMONESTADOS</h1>
+							<p:dataTable var="jugador"
+								value="#{jugadorMB.listaDeJugadores()}" selectionMode="single"
+								rowKey="#" reflow="true"
+								style="margin-bottom:20px;text-align:center;">
+								<f:facet name="header">LISTADO JUGADOR AMONESTADOS</f:facet>
+
+								<p:column headerText="NOMBRE" sortBy="#{jugador.nombre}">
+									<h:outputText value="#{jugador.nombre}" />
+								</p:column>
+
+
+								<p:column headerText="TIPO TARJETA" sortBy="">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="EDITAR">
+									<p:commandButton action="#" value="EDITAR"
+										styleClass="teal-btn">
+										<f:setPropertyActionListener value="#{jugador}" target="#" />
+									</p:commandButton>
+								</p:column>
+
+								<p:column headerText="ELIMINAR">
+									<p:commandButton action="#" value="ELIMINAR"
+										styleClass="red-btn">
+										<f:setPropertyActionListener value="#{jugador}" target="#" />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+						</p:dialog>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"
+									disabled="true"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2" align="center">
+						<p:outputLabel value="AMONESTADOS" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"
+									disabled="true"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1" align="center">
+						<p:commandButton value=""
+							styleClass="ui-button-icon-left ui-icon ui-c ui-icon-search"
+							style="border-radius:50%;" onclick="PF('dlgS4').show()"></p:commandButton>
+						<p:dialog widgetVar="dlgS4" modal="true" draggable="false"
+							resizable="false" width="40%">
+							<h1>DATOS#2 AMONESTADOS</h1>
+							<p:dataTable var="jugador"
+								value="#{jugadorMB.listaDeJugadores()}" selectionMode="single"
+								rowKey="#" reflow="true"
+								style="margin-bottom:20px;text-align:center;">
+								<f:facet name="header">LISTADO JUGADORES AMONESTADOS</f:facet>
+
+								<p:column headerText="NOMBRE" sortBy="#{jugador.nombre}">
+									<h:outputText value="#{jugador.nombre}" />
+								</p:column>
+
+								<p:column headerText="TIPO TARJETA" sortBy="">
+									<h:outputText value="" />
+								</p:column>
+								
+								<p:column headerText="EDITAR">
+									<p:commandButton action="#" value="EDITAR"
+										styleClass="teal-btn">
+										<f:setPropertyActionListener value="#{jugador}" target="#" />
+									</p:commandButton>
+								</p:column>
+
+								<p:column headerText="ELIMINAR">
+									<p:commandButton action="#" value="ELIMINAR"
+										styleClass="red-btn">
+										<f:setPropertyActionListener value="#{jugador}" target="#" />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+						</p:dialog>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="" onclick="PF('dlg4').show();"
+									style="border-radius:10%;"
+									styleClass="teal-btn ui-button-icon-left ui-icon ui-c ui-icon-add" />
+								<p:dialog widgetVar="dlg4" modal="true" height="400"
+									position="center" width="40%">
+									<div class="card card-w-title">
+										<h:form>
+											<div align="center">
+												<h1>INGRESO#2 AMONESTADOS</h1>
+											</div>
+											<br></br>
+											<!-- INGRESAR JUGADOR -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<h3>Jugador * :</h3>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:selectOneMenu id="selectJugGol" value="#"
+																style="margin-bottom:10px;text-align:center;">
+																<f:selectItems
+																	value="#{jugadorMB.listadoDeLosJugadores()}" />
+															</p:selectOneMenu>
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+											<br></br>
+											<!-- INGRESAR TIPO GOL -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<h3>Tipo Gol * :</h3>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:selectOneMenu id="selectTipoGol" value="#"
+																style="margin-bottom:10px;text-align:center;">
+																<f:selectItems value="#{operativoMB.listaDeTipoGol()}" />
+															</p:selectOneMenu>
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+											<br></br>
+											<!-- BOTON GUARDAR -->
+											<div class="ui-g ui-fluid form-group">
+												<div class="ui-g-12 ui-md-2"></div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup" style="margin-left: 50%;">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:commandButton value="Cancelar"
+																oncomplete="PF('dlg2').hide();" icon="ui-icon-check"
+																iconPos="right" style="width:auto"
+																update="@([id$=lblNombreJugador])" />
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+													<div class="ui-inputgroup" style="margin-right: 50%;">
+														<h:panelGroup styleClass="md-inputfield">
+															<p:commandButton value="Guardar"
+																actionListener="#{equipoMB.agregarJugador()}"
+																oncomplete="PF('dlg2').hide();" icon="ui-icon-check"
+																iconPos="right" style="width:auto"
+																update="@([id$=lblNombreJugador])" />
+														</h:panelGroup>
+													</div>
+												</div>
+												<div class="ui-g-12 ui-md-2"></div>
+											</div>
+										</h:form>
+									</div>
+								</p:dialog>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2"></div>
+				</div>
+
+				<br></br>
+
+				<!-- FUERAS DE LUGAR -->
+
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2" align="center">
+						<p:outputLabel value="FUERAS DE LUGAR" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+				<br></br>
+				<!-- POSESION DE BALÓN -->
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100%" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2" align="center">
+						<p:outputLabel value="POSESIÓN DE BALÓN" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<div class="ui-inputgroup">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="100%" style="text-align:center;"></p:inputText>
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+
+
+				<br></br>
+				<br></br>
+				<br></br>
+				<!-- GUARDAR FORMULARIO OPERATIVO -->
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-4"></div>
+					<div class="ui-g-12 ui-md-4">
+						<div class="ui-inputgroup" style="margin-left: 37%;">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:commandButton value="Guardar" actionListener="#"
+									icon="ui-icon-check" iconPos="right" style="width:auto" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-4"></div>
+				</div>
+			</h:form>
+		</div>
+		<!-- Aqui termina el ingreso de datos del formulario -->
+
+		<br></br>
+		<br></br>
+
+	</ui:define>
+
+</ui:composition>
