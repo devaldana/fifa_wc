@@ -24,7 +24,6 @@ public class SedeController implements IController<Sede>{
 		editarSede = new Sede();
 	}
 	
-	
 	/*
 	 * MÉTODOS DE NEGOCIO
 	 * 
