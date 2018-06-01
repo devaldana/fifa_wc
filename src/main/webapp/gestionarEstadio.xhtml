@@ -6,7 +6,7 @@
 
 	<ui:define name="content">
 		<div class="card card-w-title">
-			<h:form>
+			<h:form id="frmEstadio">
 				<div align="center">
 					<h1>FORMULARIO ESTADIO</h1>
 				</div>
@@ -20,7 +20,7 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:inputText required="true" />
+								<p:inputText required="true" value="#{estadioController.editarEstadio.nombre}"/>
 								<label></label>
 							</h:panelGroup>
 						</div>
@@ -31,9 +31,9 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<p:panelGrid styleClass="md-inputfield">
-								<p:selectOneMenu id="selectSede" value="#"
+								<p:selectOneMenu id="selectSede" value="#{estadioController.editarEstadio.sede}"
 									style="margin-bottom:10px;">
-									<f:selectItems value="#{estadioMB.listaSedes()}" />
+									<f:selectItems value="#{estadioController.sedes}" var="sede" itemLabel="#{sede.nombre}" itemValue="#{sede}"/>
 								</p:selectOneMenu>
 							</p:panelGrid>
 						</div>
@@ -51,7 +51,7 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:inputText required="true" />
+								<p:inputText required="true"  value="#{estadioController.editarEstadio.capacidad}"/>
 								<label></label>
 							</h:panelGroup>
 						</div>
@@ -63,41 +63,9 @@
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
 								<p:outputLabel for="german" />
-								<p:calendar id="german" value="" locale="de" navigator="true"
+								<p:calendar id="german" locale="de" navigator="true"  value="#{estadioController.editarEstadio.fechaInauguracion}"
 									pattern="dd/MM/yyyy" />
 							</h:panelGroup>
-						</div>
-					</div>
-					<div class="ui-g-12 ui-md-2"></div>
-				</div>
-
-				<br></br>
-				<div class="ui-g ui-fluid form-group">
-					<div class="ui-g-12 ui-md-2"></div>
-					<div class="ui-g-12 ui-md-1">
-						<p:outputLabel value="PARTIDO :" style="font-weight:bold;"></p:outputLabel>
-					</div>
-					<div class="ui-g-12 ui-md-3">
-						<div class="ui-inputgroup">
-							<p:panelGrid styleClass="md-inputfield">
-								<p:selectOneMenu id="selectPartido" value="#"
-									style="margin-bottom:10px;text-align:center;">
-									<f:selectItems value="#{operativoMB.mostrarPartidos()}" />
-								</p:selectOneMenu>
-							</p:panelGrid>
-						</div>
-					</div>
-					<div class="ui-g-12 ui-md-1">
-						<p:outputLabel value="FASE :" style="font-weight:bold;"></p:outputLabel>
-					</div>
-					<div class="ui-g-12 ui-md-3">
-						<div class="ui-inputgroup">
-							<p:panelGrid styleClass="md-inputfield">
-								<p:selectOneMenu id="selectFase" value="#"
-									style="margin-bottom:10px;text-align:center;">
-									<f:selectItems value="#{estadioMB.listaFases()}" />
-								</p:selectOneMenu>
-							</p:panelGrid>
 						</div>
 					</div>
 					<div class="ui-g-12 ui-md-2"></div>
@@ -110,8 +78,8 @@
 					<div class="ui-g-12 ui-md-4">
 						<div class="ui-inputgroup" style="margin-left: 44%;">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:commandButton value="Guardar" actionListener="#"
-									icon="ui-icon-check" iconPos="right" style="width:auto" />
+								<p:commandButton value="Guardar" actionListener="#{estadioController.guardar()}"
+									icon="ui-icon-check" iconPos="right" style="width:auto" update="frmEstadio tblEstadios"/>
 							</h:panelGroup>
 						</div>
 					</div>
@@ -123,45 +91,36 @@
 
 				<br></br>
 				<br></br>
-				<p:dataTable var="estadio" value="#{estadioMB.listadoEstadios()}"
+				<p:dataTable var="estadio" value="#{estadioController.estadios}"
 					selectionMode="single" rowKey="#" reflow="true"
-					style="margin-bottom:20px;text-align:center;">
+					style="margin-bottom:20px;text-align:center;" id="tblEstadios">
+									
 					<f:facet name="header">LISTA ESTADIOS</f:facet>
 
 					<p:column headerText="NOMBRE" sortBy="#{estadio.nombre}">
 						<h:outputText value="#{estadio.nombre}" />
 					</p:column>
 
-					<p:column headerText="SEDE" sortBy="#{estadio.laSede}">
-						<h:outputText value="#{estadio.laSede.nombre}" />
+					<p:column headerText="SEDE" sortBy="#{estadio.sede.nombre}">
+						<h:outputText value="#{estadio.sede.nombre}" />
 					</p:column>
 
 					<p:column headerText="CAPACIDAD" sortBy="#{estadio.capacidad}">
 						<h:outputText value="#{estadio.capacidad}" />
 					</p:column>
 
-					<p:column headerText="APERTURA" sortBy="#{estadio.apertura}">
-						<h:outputText value="#{estadio.apertura}" />
-					</p:column>
-
-					<p:column headerText="PARTIDO" sortBy="#{estadio.partido}">
-						<h:outputText value="#{estadio.partido}" />
-					</p:column>
-
-					<p:column headerText="FASE" sortBy="#{estadio.fase.nombre}">
-						<h:outputText value="#{estadio.fase.nombre}" />
+					<p:column headerText="APERTURA" sortBy="#{estadio.fechaInauguracion}">
+						<h:outputText value="#{estadio.fechaInauguracion}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
 					</p:column>
 
 					<p:column headerText="EDITAR">
-						<p:commandButton action="#" value="EDITAR" styleClass="teal-btn">
-							<f:setPropertyActionListener value="#{estadio}" target="#" />
-						</p:commandButton>
+						<p:commandButton action="#" value="EDITAR" styleClass="teal-btn"/>
 					</p:column>
 
 					<p:column headerText="ELIMINAR">
-						<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn">
-							<f:setPropertyActionListener value="#{estadio}" target="#" />
-						</p:commandButton>
+						<p:commandButton action="#" value="ELIMINAR" styleClass="red-btn"/>
 					</p:column>
 
 				</p:dataTable>

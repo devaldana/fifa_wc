@@ -19,7 +19,7 @@ public class Arbitro extends Persona implements Serializable {
 	
 	@Column(name="tarjetas_rojas")
 	private int tarjetasRojas;
-
+	
 	public int getPartidosArbitrados() {
 		return this.partidosArbitrados;
 	}

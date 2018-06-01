@@ -11,10 +11,8 @@
 				<div align="center">
 					<h1>FORMULARIO EQUIPO</h1>
 				</div>
-				
+
 				<br></br>
-				
-				<h:outputLabel id="lblNombreJugador" value="#{equipoMB.jugador}" />
 				<br></br>
 				<br></br>
 				<div class="ui-g ui-fluid form-group" style="">
@@ -25,7 +23,8 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:inputText required="true" />
+								<p:inputText required="true"
+									value="#{equipoController.editarEquipo.nombre}" />
 								<label></label>
 							</h:panelGroup>
 						</div>
@@ -36,63 +35,76 @@
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:inputText required="true" />
-								<label>director tecnico</label>
+								<p:inputText required="true"
+									value="#{equipoController.editarEquipo.directorTecnico}" />
+
 							</h:panelGroup>
 						</div>
 					</div>
-
-					<div class="ui-g-12 ui-md-2"></div>
-				</div>
-
+					
+					</div>
 
 				<br></br>
 				<div class="ui-g ui-fluid form-group">
 					<div class="ui-g-12 ui-md-2"></div>
 					<div class="ui-g-12 ui-md-1">
-						<p:outputLabel value="NACIONALIDAD:" style="font-weight:bold;"></p:outputLabel>
+						<p:outputLabel value="Grupo:" style="font-weight:bold;"></p:outputLabel>
 					</div>
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
-							<p:panelGrid styleClass="md-inputfield">
-								<p:selectOneMenu id="selectNacionalidad" value="#{campeonatoController.estadosCampeonato}"
-									style="margin-bottom:10px;text-align:center;">
-									<f:selectItems value="#{campeonatoController.estadosCampeonato}" />
-								</p:selectOneMenu>
-							</p:panelGrid>
+						<h:panelGroup styleClass="md-inputfield">
+							<p:selectOneMenu id="select"
+								value="#{equipoController.editarEquipo.grupo}"
+								style="margin-bottom:10px;">
+								<f:selectItems value="#{equipoController.grupos}" var="grupo"
+									itemLabel="#{grupo.nombre}" itemValue="#{grupo}" />
+							</p:selectOneMenu>
+							</h:panelGroup>
 						</div>
 					</div>
 					<div class="ui-g-12 ui-md-1">
-						<p:outputLabel value="F. FUNDACIÓN:" style="font-weight:bold;"></p:outputLabel>
+						<p:outputLabel value="Codigo pais:" style="font-weight:bold;"></p:outputLabel>
 					</div>
 					<div class="ui-g-12 ui-md-3">
 						<div class="ui-inputgroup">
-							<h:panelGroup styleClass="md-inputfield">
-								<p:outputLabel for="german" />
-								<p:calendar id="german" value="" locale="de" navigator="true"
+						<h:panelGroup styleClass="md-inputfield">
+								<p:inputText required="true"
+									value="#{equipoController.editarEquipo.codigoPais}" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-2"></div>
+				</div>
+
+				<br></br>
+
+				<div class="ui-g ui-fluid form-group">
+					<div class="ui-g-12 ui-md-2"></div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="Federacion:" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText required="true"
+									value="#{equipoController.editarEquipo.federacion}" />
+						</h:panelGroup>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-1">
+						<p:outputLabel value="Fecha fundacion:" style="font-weight:bold;"></p:outputLabel>
+					</div>
+					<div class="ui-g-12 ui-md-3">
+						<div class="ui-inputgroup">
+						<h:panelGroup styleClass="md-inputfield">
+						
+						<p:calendar id="german" locale="de" navigator="true" value="#{equipoController.editarEquipo.fechaFundacion}"
 									pattern="dd/MM/yyyy" />
+	
 							</h:panelGroup>
 						</div>
 					</div>
 					<div class="ui-g-12 ui-md-2"></div>
-				</div>
-
-				<br></br>
-				<div class="ui-g ui-fluid form-group">
-					<div class="ui-g-12 ui-md-2"></div>
-					<div class="ui-g-12 ui-md-1">
-						<p:outputLabel value="FOTO :" style="font-weight:bold;"></p:outputLabel>
-					</div>
-					<div class="ui-g-12 ui-md-3">
-						<div class="ui-inputgroup">
-							<h:panelGroup styleClass="md-inputfield">
-								<p:fileUpload value="#" mode="simple" label="SELECCIONAR FOTO"
-									skinSimple="true" update="messages"
-									allowTypes="/(\.|\/)(gif|jpe?g|png)$/" rendered="true" />
-							</h:panelGroup>
-						</div>
-					</div>
-					<div class="ui-g-12 ui-md-6"></div>
 				</div>
 
 				<div class="ui-g ui-fluid form-group" style="margin-top: 50px;">
@@ -100,8 +112,10 @@
 					<div class="ui-g-12 ui-md-2">
 						<div class="ui-inputgroup">
 							<h:panelGroup styleClass="md-inputfield">
-								<p:commandButton value="Guardar" actionListener="#"
-									icon="ui-icon-check" iconPos="right" style="width:auto" />
+								<p:commandButton value="Guardar"
+									actionListener="#{equipoController.guardar()}"
+									icon="ui-icon-check" iconPos="right" style="width:auto"
+									update="frmEquipo tblEquipos" />
 							</h:panelGroup>
 						</div>
 					</div>
@@ -120,7 +134,8 @@
 					</div>
 					<div class="ui-g-12 ui-md-4"></div>
 				</div>
-			</h:form><!-- AQUI TERMINA EL FORMULARIO CREAR EQUIPO -->
+			</h:form>
+			<!-- AQUI TERMINA EL FORMULARIO CREAR EQUIPO -->
 
 			<!-- Aqui comienza el panel emergente -->
 			<p:dialog widgetVar="dlg2" modal="true" height="920"
@@ -213,7 +228,7 @@
 
 						<div class="ui-g ui-fluid form-group">
 							<div class="ui-g-12 ui-md-4"></div>
-							<div class="ui-g-12 ui-md-4"  style="margin-left:10%;">
+							<div class="ui-g-12 ui-md-4" style="margin-left: 10%;">
 								<div class="ui-inputgroup">
 									<h:panelGroup styleClass="md-inputfield">
 										<p:fileUpload value="#" mode="simple" label="SELECCIONAR FOTO"
@@ -293,9 +308,9 @@
 			</p:dialog>
 
 			<br></br> <br></br>
-			<p:dataTable var="equipo" value="#{equipoMB.listaDeEquipos()}"
+			<p:dataTable var="equipo" value="#{equipoController.equipos}"
 				selectionMode="single" rowKey="#" reflow="true"
-				style="margin-bottom:20px;text-align:center;">
+				style="margin-bottom:20px;text-align:center;" id="tblEquipos">
 				<f:facet name="header">LISTA EQUIPOS</f:facet>
 
 				<p:column headerText="NOMBRE" sortBy="#{equipo.nombre}">
@@ -304,10 +319,6 @@
 
 				<p:column headerText="D.TECNICO" sortBy="#{equipo.directorTecnico}">
 					<h:outputText value="#{equipo.directorTecnico}" />
-				</p:column>
-
-				<p:column headerText="FOTO" sortBy="#{equipo.fotoEscudo}">
-					<h:outputText value="#{equipo.fotoEscudo}" />
 				</p:column>
 
 				<p:column headerText="EDITAR">

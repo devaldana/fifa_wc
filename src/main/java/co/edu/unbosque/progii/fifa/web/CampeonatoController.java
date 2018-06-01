@@ -9,12 +9,14 @@ import co.edu.unbosque.progii.fifa.enums.EstadoCampeonato;
 import co.edu.unbosque.progii.fifa.persistence.domain.Arbitro;
 import co.edu.unbosque.progii.fifa.persistence.domain.Campeonato;
 import co.edu.unbosque.progii.fifa.persistence.domain.Equipo;
+import co.edu.unbosque.progii.fifa.persistence.domain.Estadio;
 import co.edu.unbosque.progii.fifa.persistence.domain.Fase;
 import co.edu.unbosque.progii.fifa.persistence.domain.Grupo;
 import co.edu.unbosque.progii.fifa.persistence.domain.Partido;
 import co.edu.unbosque.progii.fifa.persistence.domain.Sede;
 import co.edu.unbosque.progii.fifa.services.CampeonatoService;
 import co.edu.unbosque.progii.fifa.services.EquipoService;
+import co.edu.unbosque.progii.fifa.services.EstadioService;
 import co.edu.unbosque.progii.fifa.services.FaseService;
 import co.edu.unbosque.progii.fifa.services.GrupoService;
 import co.edu.unbosque.progii.fifa.services.PartidoService;
@@ -42,6 +44,9 @@ public class CampeonatoController implements IController<Campeonato>{
 	@Autowired
 	private GrupoService grupoService;
 	
+	@Autowired
+	private EstadioService estadioService;
+	
 	private List<Campeonato> campeonatos;
 	private List<Fase> fases;
 	private List<Partido> partidos;
@@ -49,6 +54,7 @@ public class CampeonatoController implements IController<Campeonato>{
 	private List<Equipo> equipos;
 	private List<Grupo> grupos;
 	private List<Arbitro> arbitros;
+	private List<Estadio> estadios;
 	
 	private Campeonato campeonatoActual;
 	private Campeonato editarCampeonato;
@@ -144,9 +150,16 @@ public class CampeonatoController implements IController<Campeonato>{
 	}
 
 	public List<Arbitro> getArbitros() {
-		return 	this.arbitros = this.partidos.stream()
+		return 	this.arbitros = this.getPartidos().stream()
 				 .map( partido -> partido.getArbitro())
 				 .collect(Collectors.toList());
+	}
+	
+	public List<Estadio> getEstadios() {
+		
+		return 	this.estadios = estadioService.listarTodo().stream()
+				.filter(estadio -> estadio.getSede().getCampeonato().equals(this.campeonatoActual))
+				.collect(Collectors.toList());
 	}
 
 	public Campeonato getCampeonatoActual() {
